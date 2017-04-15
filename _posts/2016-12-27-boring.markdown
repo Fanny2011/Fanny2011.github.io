@@ -1,0 +1,16 @@
+---
+author: fanny2011
+comments: true
+date: 2016-12-27 00:00:00+00:00
+layout: post
+title: 无聊
+---
+
+还是不太会用git
+git clone https://github.com/fanny2011/fanny2011.github.io
+cd fanny2011.github.io
+git add --all
+git commit -m "Initial commit"
+git push -u origin master
+
+![图片](https://raw.githubusercontent.com/fanny2011/fanny2011.github.io/master/img/img_0758.jpg)
