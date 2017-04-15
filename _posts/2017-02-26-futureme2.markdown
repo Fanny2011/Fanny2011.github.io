@@ -1,0 +1,42 @@
+---
+author: fanny2011
+comments: true
+date: 2017-02-26 10:46:43+00:00
+layout: post
+title: welcome
+---
+
+其实早就写了，但是一直没把东西做完，拖了两个多月了，依然毫无进展，内心充满了恐惧与厌恶，算了，就这样吧，反正也没人看。_____________________________________________________________________
+
+挣扎着试了一下sendgrid，然而并没有什么反应，甚至找到了很多类似的服务，<a href="http://stackoverflow.com/questions/4798141/sendgrid-vs-postmark-vs-amazon-ses-and-other-email-smtp-api-providers">http://stackoverflow.com/questions/4798141/sendgrid-vs-postmark-vs-amazon-ses-and-other-email-smtp-api-providers</a> ，然而还是觉得不稳妥。
+
+<a href="http://stackoverflow.com/questions/3181332/sending-email-using-http-protocol">http://stackoverflow.com/questions/3181332/sending-email-using-http-protocol</a> 此处问的正是我的问题，http协议能发送邮件吗？无论如何还是需要使用mail server实现smtp/imap协议才能投递邮件，另外回答推荐了php的mail function <a href="http://php.net/manual/en/function.mail.php">http://php.net/manual/en/function.mail.php</a>。于是马上在localhost试了一下，并没有反应，还好看到说localhost本来就没有反应的<a href="http://stackoverflow.com/questions/5335273/how-to-send-an-email-using-php">http://stackoverflow.com/questions/5335273/how-to-send-an-email-using-php</a>，还担心着需不需要安装什么东西，先在自己的服务器上试了一下居然就成功了，赶紧去<a href="http://app.oraclize.it/home/test_query">http://app.oraclize.it/home/test_query</a> call了一下，也成功了，幸福来得太突然。之后要试POST的过程，不是很顺利，因为对php怎么处理POST，怎么处理json完全不懂，<a href="http://www.01happy.com/php-post-request-get-json-param/">http://www.01happy.com/php-post-request-get-json-param/</a> <a href="https://my.oschina.net/u/205403/blog/325595">https://my.oschina.net/u/205403/blog/325595</a>，以为要用
+<pre><code class="php functions">file_get_contents</code><code class="php plain">(</code><code class="php string">"php://input"</code><code class="php plain">);</code></pre>
+结果没效果，echo了一下发现Oraclize的POST发送的是普通的请求，只要用$_POST就好了，虽然它的POST data输入的是json格式。。省略试的过程中邮件发到了垃圾邮件箱和输错了邮箱地址以及中途听了很久音乐，又花了一个下午才搞通，然而其实这个实现过程很不靠谱啊，还需要我的服务器提供php代码用我的服务器的mail server发送邮件，还是很容易被篡改啊，根本没有达到老师的预期效果，我估计老师希望的是能把smtp/imap协议这一套也在blockchain内实现。不管了，赶紧搞个demo出来吧，已经两个多星期了，一定要在下周三前搞出来。
+
+下一步是把定时搞出来。结果没看懂，最后决定用Oraclize自带的定时功能Orz。。想在cPanel上安装ethereum，然而不知道怎么掉出command line <a href="https://documentation.cpanel.net/display/CKB/Getting+Started+with+Linux+Commands#GettingStartedwithLinuxCommands-CommonLinuxcommands">https://documentation.cpanel.net/display/CKB/Getting+Started+with+Linux+Commands#GettingStartedwithLinuxCommands-CommonLinuxcommands</a>，有人说用ssh<a href="http://www.webhostingtalk.com/showthread.php?t=932320">http://www.webhostingtalk.com/showthread.php?t=932320</a>，于是按照<a href="http://www.tuicool.com/articles/YreMV3v">http://www.tuicool.com/articles/YreMV3v</a> （<a href="https://www.siteground.com/kb/How_to_generate_an_SSH_key_pair_in_Mac_OS/">https://www.siteground.com/kb/How_to_generate_an_SSH_key_pair_in_Mac_OS/</a>）<a href="http://www.cnblogs.com/sheldonxu/archive/2012/09/17/2688281.html">http://www.cnblogs.com/sheldonxu/archive/2012/09/17/2688281.html</a> <a href="https://www.siteground.com/kb/how_to_log_in_to_my_shared_account_via_ssh_in_mac_os/">https://www.siteground.com/kb/how_to_log_in_to_my_shared_account_via_ssh_in_mac_os/</a> ，还是不行，后来发现我的主机开通ssh权限需要付费。。。
+
+现在的问题是以前也是用的<span class="s1">geth --testnet --rpc --rpccorsdomain “*”</span>，但是现在http://localhost:8545/ 报错
+<pre>{"jsonrpc":"2.0","error":{"code":-32600,"message":"EOF"}}</pre>
+；<a href="http://localhost/~fannyzhang/documents/futureme.html">http://localhost/~fannyzhang/documents/futureme.html</a> 报错
+<pre>XMLHttpRequest cannot load http://localhost:8545/. Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost' is therefore not allowed access.</pre>
+；browser-solidity报错<a class="question-hyperlink" href="http://ethereum.stackexchange.com/questions/7796/invalid-json-rpc-response-in-browser-solidity">Invalid JSON RPC response: “”</a> 。找方法，用curl试的时候又发现报错<span class="s1">curl: (7) Failed to receive SOCKS5 connect request ack. 原来是上次乱搞<a href="https://www.logcg.com/archives/1617.html">https://www.logcg.com/archives/1617.html</a> 在~/.bash_profile里走了代理，用nano重新编辑好了，但是问题还是没有得到解决。可是好奇怪，照着<a href="http://ethereum.stackexchange.com/questions/7796/invalid-json-rpc-response-in-browser-solidity">http://ethereum.stackexchange.com/questions/7796/invalid-json-rpc-response-in-browser-solidity</a>做了，然后又回到testnet，使用</span>
+<pre class="p1"><span class="s1">geth --testnet --rpc --rpcaddr "localhost" --rpcport "8545" --rpccorsdomain "*" --unlock 0 console</span></pre>
+<p class="p1">有好了。。。难道又是引号的问题？！（好吧，还真是。。。我明明应该知道的，浪费了我多少的时间。。。原来是.page文件就算我输入的是英文引号，copy出来的还是中文引号，我真是服了它了。）</p>
+<p class="p1">现在开始正式在futureme.html里测试，报了invalid address错，于是想在geth里先compile一个简单的multiply例子，但是发现貌似solc还没装<a href="https://lightrains.com/blogs/compile-deploy-solidity-contract-ethereum-console-geth-part-1">https://lightrains.com/blogs/compile-deploy-solidity-contract-ethereum-console-geth-part-1</a> 。想用npm装来的，太慢了，于是</p>
+
+<pre><span class="nx">brew</span> <span class="nx">update</span>
+<span class="nx">brew</span> <span class="nx">upgrade</span>
+<span class="nx">brew</span> <span class="nx">tap</span> <span class="nx">ethereum</span><span class="o">/</span><span class="nx">ethereum</span>
+<span class="nx">brew</span> <span class="nx">install</span> <span class="nx">solidity</span>
+<span class="nx">brew</span> <span class="nx">linkapps</span> <span class="nx">solidity</span></pre>
+<p class="p1">搞了半天，居然还是没有设置default账号才这样的，我明明应该知道的，但还是搞了这么久，好想去撞墙。</p>
+
+<pre><code>web3.eth.defaultAccount=eth.coinbase;</code></pre>
+搞了好久好久好久，为什么只有一个参数string的时候成功，多一个参数uint就失败，最后才发现错误，因为我给接口添加参数的时候，没有更新ABI.json，而且本地更新后，浏览器也要刷新一下ABI.json的内容才行。。。我真是给自己跪下了。
+
+然后发现一个usingOraclize contract只能发一次query。
+<h1>How to retrieve the return value of a contract method by sendTransaction?</h1>
+<p class="p1"><a href="https://forum.ethereum.org/discussion/2440/how-to-retrieve-the-return-value-of-a-contract-method-by-sendtransaction">https://forum.ethereum.org/discussion/2440/how-to-retrieve-the-return-value-of-a-contract-method-by-sendtransaction</a></p>
+<p class="p1"><a href="https://www.reddit.com/r/ethereum/comments/3azhpx/return_value_from_ethereum_contract_method/">https://www.reddit.com/r/ethereum/comments/3azhpx/return_value_from_ethereum_contract_method/</a></p>
+<p class="p1"><a href="https://github.com/ethereum/wiki/wiki/Useful-%C3%90app-Patterns">https://github.com/ethereum/wiki/wiki/Useful-%C3%90app-Patterns</a></p>
