@@ -5,12 +5,14 @@ date: 2016-12-27 00:00:00+00:00
 layout: post
 title: 无聊
 ---
+github上利用jekyll搭建自己的blog的操作顺序？     
+https://www.zhihu.com/question/30018945     
 
-还是不太会用git
-git clone https://github.com/fanny2011/fanny2011.github.io
-cd fanny2011.github.io
-git add --all
-git commit -m "Initial commit"
+还是不太会用git      
+git clone https://github.com/fanny2011/fanny2011.github.io    
+cd fanny2011.github.io     
+git add --all     
+git commit -m "Initial commit"     
 git push -u origin master
 
 ![图片](https://raw.githubusercontent.com/fanny2011/fanny2011.github.io/master/img/img_0758.jpg)
