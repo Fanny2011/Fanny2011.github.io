@@ -1,0 +1,31 @@
+---
+author: fanny2011
+comments: true
+date: 2016-12-27 17:33:58+00:00
+layout: post
+title: 制作未来邮箱的挫败过程（1）
+---
+
+想用Ethereum的smart contract实现一个应用，类似<a href="http://www.playpcesor.com/2009/11/emailfuturecom.html">http://www.playpcesor.com/2009/11/emailfuturecom.html</a>，<a href="https://www.futureme.org/">https://www.futureme.org/</a>和<a href="http://hi2future.com/">http://hi2future.com/</a> 的这种定时发邮件的网页应用。简单来说就是用smart contract实现两个功能：定时和发送邮件。
+
+关于定时，看到了这个应用<a href="http://www.ethereum-alarm-clock.com/">http://www.ethereum-alarm-clock.com/</a>，还有专门的document可以看，并且testnet上部署好的合约地址也有，很开心啊，很想马上试试啊，结果去<a href="https://testnet.etherscan.io/">https://testnet.etherscan.io/</a> 没有搜到，发现testnet换名字了，不叫Morden了，咱现在叫Ropsten，一google，发现11月20号刚换的<a href="https://blog.ethereum.org/2016/11/20/from-morden-to-ropsten/">https://blog.ethereum.org/2016/11/20/from-morden-to-ropsten/</a> 。。。好嘛，这么倒霉？我也不管为什么要换，区别是什么了，赶紧把geth到DB更新呗。找到答案<a href="http://ethereum.stackexchange.com/questions/10261/how-to-switch-from-morden-to-ropsten">http://ethereum.stackexchange.com/questions/10261/how-to-switch-from-morden-to-ropsten</a>说只要geth是1.5.3以上，geth --testnet removedb，geth --testnet两句话搞定，但是我的geth版本是1.5.0，心想反正以后也是要更新的，那就更新呗，结果掉坑。。。安装的时候用的Homebrew，据说又只要两句话brew update和brew upgrade ethereum就能更新geth了，开心得不得了，结果brew update死活没反应，直接说time out也好，也不说超时，也没有进度条，就僵在那里不动。找了各种方法啊，说网被墙了，要走代理啊，说要用国内的镜像源啊，搞了半天，还是没有动静，于是怒删Homebrew，再重新装一遍，用<a href="http://ethfans.org/topics/143">http://ethfans.org/topics/143</a> 这里介绍的指令，终于顺利装好geth 1.5.5了，就不说下载花了多少时间了，反正搞好，还装了个Mist，一天时间就差不多了，并且之前账户都清零了，还要等半天让它在testnet上挖矿。
+
+定时还没试，又想先搞发送邮件，本来是找到一个例子的<a href="http://blockchain2email.com/">http://blockchain2email.com/</a> 然而人家好像只提供了合约地址，没给源码，当然合约地址是Morden的。。。你说我怎么就这么倒霉呢。。然后就想自己搞啊，想到可以用Oraclize发送URL query，说不定有可以直接send email的url呢，反正先搞通Oraclize再说，看上去也很简单嘛。要用Oraclize，要么把Oraclize的contract和自己的一起编译一遍，比如这个例子https://www.reddit.com/r/ethereum/comments/47opsw/10_ether_to_solve_this_problem/，<a href="http://pastebin.com/kfRwpq1P">http://pastebin.com/kfRwpq1P</a>非常详细啊；要么import，然而官网文档http://docs.oraclize.it/?javascript#ethereum-integration-getting-everything-on-track说
+<pre class="highlight javascript"><code><span class="cm">import "dev.oraclize.it/api.sol" just works while using 
+dev.oraclize.it web IDE</span></code></pre>
+这个在线编译器<a href="http://dapps.oraclize.it/browser-solidity/#gist=9817193e5b05206847ed1fcd1d16bd1d&amp;version=soljson-v0.4.7+commit.822622cf.js">http://dapps.oraclize.it/browser-solidity/#gist=9817193e5b05206847ed1fcd1d16bd1d&amp;version=soljson-v0.4.7+commit.822622cf.js</a> <a href="https://github.com/oraclize/ethereum-examples/tree/master/solidity">https://github.com/oraclize/ethereum-examples/tree/master/solidity</a>比普通的https://ethereum.github.io/browser-solidity/#version=soljson-v0.4.7+commit.822622cf.js 多了Oraclize插件，然而这个在线编译器不会用啊，要是也有傻瓜教程就好了。另外<a href="https://live.ether.camp/">Ethereum Studio</a>也集成了Oraclize插件，然而Ethereum Studio也不会用啊，明天好好看看这个文档吧<a href="https://nogo10.gitbooks.io/ether-camp-live-studio-primer/content/solidity_primer.html">https://nogo10.gitbooks.io/ether-camp-live-studio-primer/content/solidity_primer.html</a>
+
+还有些资料，明天再看吧，总之想撞墙。。。
+
+http://www.hudsonjameson.com/ethereummarriage/ http://ethereum.stackexchange.com/questions/10765/oraclize-out-of-gas-on-ropsten-testnet http://ethereum.stackexchange.com/questions/2/how-can-an-ethereum-contract-get-data-from-a-website http://ethereum.stackexchange.com/questions/6487/how-to-import-oraclize-module http://app.oraclize.it/home/test_query#VVJMKEdFVCk=:anNvbihodHRwOi8vd3d3LnRpbWVhcGkub3JnL3V0Yy9ub3cuanNvbikuZGF0ZVN0cmluZw== http://ethereum.stackexchange.com/questions/184/how-can-i-debug-a-smart-contract
+
+今天继续，首先是看了个视频感觉还行，<a href="https://www.youtube.com/watch?v=gMNPN2ofAvM&amp;t=11s">https://www.youtube.com/watch?v=gMNPN2ofAvM&amp;t=11s</a>，然后又是了下加了Oraclize的browser-solidity的四个小例子，都很顺利，然而用昨天找到的那个例子试的时候，各种不行。ping函数不行，我想是不是钱不够，但是加了钱以后，create老报错，后来看了下ping函数的compiler warning，查了一下才发现<a href="http://solidity.readthedocs.io/en/develop/contracts.html">http://solidity.readthedocs.io/en/develop/contracts.html</a>
+![图片](img/payable.jpeg)
+
+好吧。。。这就解释得通为什么加了钱，create不行了。果然如视频所说，warning也不能漏掉啊。（然后另一个warning：Return value of low-level calls not used。<a href="http://ethereum.stackexchange.com/questions/9213/return-value-of-low-level-calls-not-used">http://ethereum.stackexchange.com/questions/9213/return-value-of-low-level-calls-not-used</a> 。 ）至于怎么在browser-solidity调试呢，就用Event 当做print好了，反正一般来说contract也不会很复杂。
+
+然后之前一直思考的问题，我有多个contract有继承关系要部，应该怎么部署呢，现在有简便方法了，直接copy brower-solidity的Web3 Deploy那一栏就好啦http://ethereum.stackexchange.com/questions/3083/how-to-deploy-contract-into-local-running-node-using-solidity-browser，好轻松哦。
+
+整个过程让我感受到的就是，take it easy 以及 Youtube上还是有挺多smart contract的操作视频的，应该要多看看了。
+
+好啦，现在的问题到了，有没有用url发送email的api。<a href="https://sendgrid.com/docs/API_Reference/Web_API/mail.html">https://sendgrid.com/docs/API_Reference/Web_API/mail.html</a> 这个貌似不错，而且令人惊喜的是Oraclize也支持URL(POST)，然而sendgrid要有一个注册账户和密码，总不能要求每个访问我页面的人都注册吧，那或者只用我这个管理员的账号？
