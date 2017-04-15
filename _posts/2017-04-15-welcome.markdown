@@ -1,7 +1,0 @@
----
-author: fanny2011
-comments: true
-date: 2017-04-15 15:24:00+00:00
-layout: post
-title: welcome
----
