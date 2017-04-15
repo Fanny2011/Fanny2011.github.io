@@ -3,7 +3,7 @@ author: fanny2011
 comments: true
 date: 2016-12-27 17:33:58+00:00
 layout: post
-title: welcome
+title: 制作未来邮箱的挫败过程（1）
 ---
 
 想用Ethereum的smart contract实现一个应用，类似<a href="http://www.playpcesor.com/2009/11/emailfuturecom.html">http://www.playpcesor.com/2009/11/emailfuturecom.html</a>，<a href="https://www.futureme.org/">https://www.futureme.org/</a>和<a href="http://hi2future.com/">http://hi2future.com/</a> 的这种定时发邮件的网页应用。简单来说就是用smart contract实现两个功能：定时和发送邮件。
