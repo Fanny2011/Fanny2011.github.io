@@ -20,7 +20,7 @@ dev.oraclize.it web IDE</span></code></pre>
 http://www.hudsonjameson.com/ethereummarriage/ http://ethereum.stackexchange.com/questions/10765/oraclize-out-of-gas-on-ropsten-testnet http://ethereum.stackexchange.com/questions/2/how-can-an-ethereum-contract-get-data-from-a-website http://ethereum.stackexchange.com/questions/6487/how-to-import-oraclize-module http://app.oraclize.it/home/test_query#VVJMKEdFVCk=:anNvbihodHRwOi8vd3d3LnRpbWVhcGkub3JnL3V0Yy9ub3cuanNvbikuZGF0ZVN0cmluZw== http://ethereum.stackexchange.com/questions/184/how-can-i-debug-a-smart-contract
 
 今天继续，首先是看了个视频感觉还行，<a href="https://www.youtube.com/watch?v=gMNPN2ofAvM&amp;t=11s">https://www.youtube.com/watch?v=gMNPN2ofAvM&amp;t=11s</a>，然后又是了下加了Oraclize的browser-solidity的四个小例子，都很顺利，然而用昨天找到的那个例子试的时候，各种不行。ping函数不行，我想是不是钱不够，但是加了钱以后，create老报错，后来看了下ping函数的compiler warning，查了一下才发现<a href="http://solidity.readthedocs.io/en/develop/contracts.html">http://solidity.readthedocs.io/en/develop/contracts.html</a>
-![图片](img/payable.jpeg)
+![图片](https://raw.githubusercontent.com/fanny2011/fanny2011.github.io/master/img/payable.jpeg)
 
 好吧。。。这就解释得通为什么加了钱，create不行了。果然如视频所说，warning也不能漏掉啊。（然后另一个warning：Return value of low-level calls not used。<a href="http://ethereum.stackexchange.com/questions/9213/return-value-of-low-level-calls-not-used">http://ethereum.stackexchange.com/questions/9213/return-value-of-low-level-calls-not-used</a> 。 ）至于怎么在browser-solidity调试呢，就用Event 当做print好了，反正一般来说contract也不会很复杂。
 
